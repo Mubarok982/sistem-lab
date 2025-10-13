@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2025 at 08:10 AM
+-- Generation Time: Oct 13, 2025 at 08:07 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -170,6 +170,54 @@ CREATE TABLE `mstr_akun` (
 --
 
 INSERT INTO `mstr_akun` (`id`, `username`, `password`, `nama`, `foto`, `role`) VALUES
+(1, 'John Doe', '000001', 'John Doe', '', 'operator'),
+(9, 'Muhammad Devananda Andika Putra', '000009', 'Muhammad Devananda Andika Putra', 'profile_6811e606353fc0_42049343.PNG', 'mahasiswa'),
+(13, 'Mukhtar Hanafi, ST., MCs.', '000013', 'Mukhtar Hanafi, ST., MCs.', '', 'dosen'),
+(16, 'R. Arri Widyanto, S.Kom.,MT', '000016', 'R. Arri Widyanto, S.Kom.,MT', '', 'dosen'),
+(21, 'Andi Widiyanto, M.Kom', '000021', 'Andi Widiyanto, M.Kom', '', 'dosen'),
+(26, 'Bambang Pujiarto, M.Kom', '000026', 'Bambang Pujiarto, M.Kom', '', 'dosen'),
+(31, 'Nugroho Agung Prabowo, ST.,M.Kom', '000031', 'Nugroho Agung Prabowo, ST.,M.Kom', NULL, 'dosen'),
+(32, 'Nuryanto, ST., M. Kom', '000032', 'Nuryanto, ST., M. Kom', NULL, 'dosen'),
+(33, 'Purwono Hendradi, M.Kom', '000033', 'Purwono Hendradi, M.Kom', NULL, 'dosen'),
+(34, 'Dr. Uky Yudatama, S.Si.,M.Kom., M.M', '000034', 'Dr. Uky Yudatama, S.Si.,M.Kom., M.M', NULL, 'dosen'),
+(35, 'Endah Ratna Arumi, M. Cs.', '000035', 'Endah Ratna Arumi, M. Cs.', NULL, 'dosen'),
+(36, 'Agus Setiawan, M.Eng', '000036', 'Agus Setiawan, M.Eng', NULL, 'dosen'),
+(37, 'Emilya Ully Artha, M.Kom', '000037', 'Emilya Ully Artha, M.Kom', NULL, 'dosen'),
+(38, 'Ardhin Primadewi, S.Si, M.TI.', '000038', 'Ardhin Primadewi, S.Si, M.TI.', NULL, 'dosen'),
+(39, 'Setiya Nugroho, ST., M.Eng.', '000039', 'Setiya Nugroho, ST., M.Eng.', NULL, 'dosen'),
+(40, 'Dimas Sasongko, S. Kom., M. Eng', '000040', 'Dimas Sasongko, S. Kom., M. Eng', NULL, 'dosen'),
+(41, 'Maimunah, S. Si., M. Kom', '000041', 'Maimunah, S. Si., M. Kom', NULL, 'dosen'),
+(42, 'Pristi Sukmasetya, S.Komp., M.Kom', '000042', 'Pristi Sukmasetya, S.Komp., M.Kom', NULL, 'dosen'),
+(43, 'Rofi Abul Hasani, S.Kom., M.Eng', '000043', 'Rofi Abul Hasani, S.Kom., M.Eng', NULL, 'dosen'),
+(44, 'Arif Zain', '000044', 'Arif Zain', NULL, 'mahasiswa'),
+(45, 'Azwar Wicaksono Heru Saputro', '000045', 'Azwar Wicaksono Heru Saputro', NULL, 'mahasiswa'),
+(46, 'Baruna Bima Fatkurrohman', '000046', 'Baruna Bima Fatkurrohman', NULL, 'mahasiswa'),
+(47, 'Ir. Affan Rifa\'i, ST., M.T.', '000047', 'Ir. Affan Rifa\'i, ST., M.T.', NULL, 'dosen'),
+(48, 'fadil abdilah', '000048', 'fadil abdilah', NULL, 'mahasiswa'),
+(58, 'Ichwan Taufiq', '000058', 'Ichwan Taufiq', NULL, 'mahasiswa'),
+(59, 'Tata Usaha', '000059', 'Tata Usaha', NULL, 'tata_usaha'),
+(60, 'saya', '000060', 'saya', NULL, 'mahasiswa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mstr_akun_backup`
+--
+
+CREATE TABLE `mstr_akun_backup` (
+  `id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `username` varchar(50) NOT NULL,
+  `password` text NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `foto` text DEFAULT NULL,
+  `role` enum('dosen','mahasiswa','operator','tata_usaha') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `mstr_akun_backup`
+--
+
+INSERT INTO `mstr_akun_backup` (`id`, `username`, `password`, `nama`, `foto`, `role`) VALUES
 (1, 'admin', '$2y$10$kZrSExjLOtd5fyGMrfm2.u11K7Skec4v3rXKWdhsRZBhGcAhiYcM2', 'John Doe', '', 'operator'),
 (9, '18.0504.0059', '$2y$10$kZrSExjLOtd5fyGMrfm2.u11K7Skec4v3rXKWdhsRZBhGcAhiYcM2', 'Muhammad Devananda Andika Putra', 'profile_6811e606353fc0_42049343.PNG', 'mahasiswa'),
 (13, '0602047502', '$2y$10$kZrSExjLOtd5fyGMrfm2.u11K7Skec4v3rXKWdhsRZBhGcAhiYcM2', 'Mukhtar Hanafi, ST., MCs.', '', 'dosen'),
@@ -260,6 +308,28 @@ INSERT INTO `mstr_komponen_nilai_ujian_skripsi` (`id`, `keterangan`, `keterangan
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `nilai`
+--
+
+CREATE TABLE `nilai` (
+  `id` bigint(20) NOT NULL,
+  `id_mahasiswa` bigint(20) NOT NULL,
+  `id_ujian` bigint(20) NOT NULL,
+  `nilai_total` decimal(5,2) NOT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
+  `tanggal_penilaian` date DEFAULT curdate()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `nilai`
+--
+
+INSERT INTO `nilai` (`id`, `id_mahasiswa`, `id_ujian`, `nilai_total`, `keterangan`, `tanggal_penilaian`) VALUES
+(1, 58, 1, 87.50, 'Lulus dengan baik', '2025-10-13');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `saran_ujian_skripsi`
 --
 
@@ -307,7 +377,10 @@ INSERT INTO `skripsi` (`id`, `id_mahasiswa`, `tema`, `judul`, `pembimbing1`, `pe
 (16, 45, '', 'Mobile ISPN (Instrumen Skrining Penempatan Narapidana) Di Lembaga Pemasyarakatan Kelas Iia Magelang', 13, 36, '2025-02-03', '', 'skripsi_680e6af6f37574_27321094.pdf', NULL),
 (17, 46, '', 'Sistem Rekapitulasi Tingkat Kegemaran Membaca Dari Transaksi Membaca Di Perpustakaan Komunitas. Studi Kasus Komunitas Literasi Sosial Magelang.', 13, 39, '2025-02-03', '', NULL, NULL),
 (22, 58, 'Software Engineering', 'apa ya', 36, 21, '2025-05-23', 'Reguler', NULL, NULL),
-(23, 48, 'Artificial Intelligence', 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 36, 38, '2025-06-16', 'Reguler', NULL, NULL);
+(23, 48, 'Artificial Intelligence', 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 36, 38, '2025-06-16', 'Reguler', NULL, NULL),
+(24, 58, 'Networking', 'mie gacoan jualan nuklir', NULL, NULL, '2025-10-13', 'Penyetaraan', NULL, NULL),
+(25, 58, 'Software Engineering', 'apalagi ya', NULL, NULL, '2025-10-13', 'Penyetaraan', NULL, NULL),
+(26, 58, 'Artificial Intelligence', 'mie gacoan jualan nuklir', NULL, NULL, '2025-10-13', 'Penyetaraan', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -355,6 +428,7 @@ CREATE TABLE `syarat_sempro` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `naskah` varchar(255) NOT NULL,
   `id_ujian_skripsi` bigint(20) UNSIGNED NOT NULL,
+  `ipk` decimal(3,2) DEFAULT NULL,
   `fotokopi_daftar_nilai` varchar(255) DEFAULT NULL,
   `fotokopi_krs` varchar(255) DEFAULT NULL,
   `buku_kendali_bimbingan` varchar(255) DEFAULT NULL,
@@ -368,9 +442,10 @@ CREATE TABLE `syarat_sempro` (
 -- Dumping data for table `syarat_sempro`
 --
 
-INSERT INTO `syarat_sempro` (`id`, `naskah`, `id_ujian_skripsi`, `fotokopi_daftar_nilai`, `fotokopi_krs`, `buku_kendali_bimbingan`, `lembar_revisi_ba_dan_tanda_terima_laporan_kp`, `bukti_seminar_teman`, `status`, `catatan`) VALUES
-(12, '6811d941e576d.pdf', 37, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(13, '683ffff1cb1ce.pdf', 69, '68400003679ce.pdf', '683ffff1cd305.pdf', '683ffff1c770c.pdf', NULL, '683ffff1c950b.pdf', NULL, NULL);
+INSERT INTO `syarat_sempro` (`id`, `naskah`, `id_ujian_skripsi`, `ipk`, `fotokopi_daftar_nilai`, `fotokopi_krs`, `buku_kendali_bimbingan`, `lembar_revisi_ba_dan_tanda_terima_laporan_kp`, `bukti_seminar_teman`, `status`, `catatan`) VALUES
+(12, '6811d941e576d.pdf', 37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, '683ffff1cb1ce.pdf', 69, NULL, '68400003679ce.pdf', '683ffff1cd305.pdf', '683ffff1c770c.pdf', NULL, '683ffff1c950b.pdf', NULL, NULL),
+(14, '1760362875_naskah.docx', 74, 1.51, '1760362875_fotokopi_daftar_nilai.docx', '1760362875_fotokopi_krs.docx', '1760362875_buku_kendali_bimbingan.docx', '1760362875_lembar_revisi_ba_dan_tanda_terima_laporan_kp.docx', '1760362875_bukti_seminar_teman.docx', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -422,6 +497,7 @@ CREATE TABLE `ujian_skripsi` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_skripsi` bigint(20) UNSIGNED NOT NULL,
   `tanggal` date DEFAULT NULL,
+  `waktu_ujian` time DEFAULT NULL,
   `tanggal_daftar` date DEFAULT NULL,
   `ruang` varchar(50) DEFAULT NULL,
   `penguji1` bigint(20) UNSIGNED DEFAULT NULL,
@@ -437,12 +513,15 @@ CREATE TABLE `ujian_skripsi` (
 -- Dumping data for table `ujian_skripsi`
 --
 
-INSERT INTO `ujian_skripsi` (`id`, `id_skripsi`, `tanggal`, `tanggal_daftar`, `ruang`, `penguji1`, `penguji2`, `penguji3`, `id_jenis_ujian_skripsi`, `persetujuan_pembimbing1`, `persetujuan_pembimbing2`, `status`) VALUES
-(37, 12, '2025-05-09', '2025-01-01', 'R-203', 31, 32, NULL, 16, 1, 0, 'Perbaikan'),
-(68, 12, '2025-08-15', '2025-05-01', 'R-203', 13, 32, NULL, 17, 0, 0, 'Berlangsung'),
-(69, 22, NULL, '2025-05-23', NULL, NULL, NULL, NULL, 16, 0, 0, 'Berlangsung'),
-(70, 22, NULL, '2025-05-23', NULL, NULL, NULL, NULL, 17, 0, 0, 'Berlangsung'),
-(71, 23, NULL, '2025-06-16', NULL, NULL, NULL, NULL, 16, 0, 0, 'Berlangsung');
+INSERT INTO `ujian_skripsi` (`id`, `id_skripsi`, `tanggal`, `waktu_ujian`, `tanggal_daftar`, `ruang`, `penguji1`, `penguji2`, `penguji3`, `id_jenis_ujian_skripsi`, `persetujuan_pembimbing1`, `persetujuan_pembimbing2`, `status`) VALUES
+(37, 12, '2025-05-09', NULL, '2025-01-01', 'R-203', 31, 32, NULL, 16, 1, 0, 'Perbaikan'),
+(68, 12, '2025-08-15', NULL, '2025-05-01', 'R-203', 13, 32, NULL, 17, 0, 0, 'Berlangsung'),
+(69, 22, NULL, NULL, '2025-05-23', NULL, NULL, NULL, NULL, 16, 0, 0, 'Berlangsung'),
+(70, 22, NULL, NULL, '2025-05-23', NULL, NULL, NULL, NULL, 17, 0, 0, 'Berlangsung'),
+(71, 23, NULL, NULL, '2025-06-16', NULL, NULL, NULL, NULL, 16, 0, 0, 'Berlangsung'),
+(72, 25, NULL, NULL, '2025-10-13', NULL, NULL, NULL, NULL, 1, 0, 0, ''),
+(73, 25, NULL, NULL, '2025-10-13', NULL, NULL, NULL, NULL, 1, 0, 0, ''),
+(74, 25, NULL, NULL, '2025-10-13', NULL, NULL, NULL, NULL, 1, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -456,6 +535,7 @@ CREATE TABLE `validasi_syarat_pendadaran` (
   `nama_field_syarat` varchar(100) NOT NULL,
   `status` enum('Diterima','Revisi','Menunggu') NOT NULL DEFAULT 'Menunggu',
   `catatan` text DEFAULT NULL,
+  `tanggal_validasi` datetime DEFAULT NULL,
   `id_validator` int(11) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -472,6 +552,7 @@ CREATE TABLE `validasi_syarat_sempro` (
   `nama_field_syarat` varchar(100) NOT NULL,
   `status` enum('Diterima','Revisi','Menunggu') NOT NULL DEFAULT 'Menunggu',
   `catatan` text DEFAULT NULL,
+  `tanggal_validasi` datetime DEFAULT NULL,
   `id_validator` int(11) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -522,6 +603,12 @@ ALTER TABLE `mstr_akun`
 ALTER TABLE `mstr_komponen_nilai_ujian_skripsi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_mst_komponen_jenis_skripsi` (`id_jenis_ujian_skripsi`);
+
+--
+-- Indexes for table `nilai`
+--
+ALTER TABLE `nilai`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `saran_ujian_skripsi`
@@ -617,6 +704,12 @@ ALTER TABLE `mstr_komponen_nilai_ujian_skripsi`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
+-- AUTO_INCREMENT for table `nilai`
+--
+ALTER TABLE `nilai`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `saran_ujian_skripsi`
 --
 ALTER TABLE `saran_ujian_skripsi`
@@ -626,7 +719,7 @@ ALTER TABLE `saran_ujian_skripsi`
 -- AUTO_INCREMENT for table `skripsi`
 --
 ALTER TABLE `skripsi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `syarat_pendadaran`
@@ -638,7 +731,7 @@ ALTER TABLE `syarat_pendadaran`
 -- AUTO_INCREMENT for table `syarat_sempro`
 --
 ALTER TABLE `syarat_sempro`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_nilai_ujian_skripsi`
@@ -650,7 +743,7 @@ ALTER TABLE `tbl_nilai_ujian_skripsi`
 -- AUTO_INCREMENT for table `ujian_skripsi`
 --
 ALTER TABLE `ujian_skripsi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `validasi_syarat_pendadaran`

@@ -1,9 +1,3 @@
-<?php
-// Header & Sidebar
-$this->load->view('templates/header', $title);
-?>
-
-<!-- Begin Page Content -->
 <div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
@@ -55,6 +49,3 @@ $this->load->view('templates/header', $title);
         </div>
     </div>
 </div>
-<!-- /.container-fluid -->
-
-<?php $this->load->view('templates/footer'); ?>

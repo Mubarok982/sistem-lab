@@ -53,7 +53,7 @@ class Auth extends CI_Controller {
     public function dosen()
     {
         if ($this->session->userdata('role') === 'dosen') {
-            redirect('dosen/dashboard');
+            redirect('dashboard');
         }
 
         $this->form_validation->set_rules('username','Username','required|trim');
@@ -63,7 +63,7 @@ class Auth extends CI_Controller {
             $data['title'] = 'Login Dosen';
             $this->load->view('auth/login_dosen', $data);
         } else {
-            $this->_proses_login('dosen','dosen/dashboard');
+            $this->_proses_login('dosen','dashboard');
         }
     }
 
