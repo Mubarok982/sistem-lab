@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('dashboard'); ?>">
+        <a class="nav-link" href="<?= base_url('Dashboard'); ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -31,14 +31,6 @@
         <a class="nav-link" href="<?= base_url('dosen/mahasiswa_bimbingan'); ?>">
             <i class="fas fa-fw fa-users"></i>
             <span>Mahasiswa Bimbingan</span>
-        </a>
-    </li>
-
-    <!-- Nav Item - Persetujuan Ujian -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('dosen/persetujuan_ujian'); ?>">
-            <i class="fas fa-fw fa-check-square"></i>
-            <span>Persetujuan Ujian</span>
         </a>
     </li>
 
@@ -60,8 +52,8 @@
     <!-- Nav Item - Penilaian Ujian -->
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('dosen/penilaian_ujian'); ?>">
-            <i class="fas fa-fw fa-edit"></i>
-            <span>Input Nilai Ujian</span>
+            <i class="fas fa-fw fa-clipboard-check"></i>
+            <span>Penilaian Ujian</span>
         </a>
     </li>
 
@@ -69,16 +61,15 @@
 
     <!-- Logout -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('auth/logout'); ?>" data-toggle="modal" data-target="#logoutModal">
+        <a class="nav-link" href="<?= base_url('auth/logout'); ?>">
             <i class="fas fa-fw fa-sign-out-alt"></i>
             <span>Logout</span>
         </a>
     </li>
 
-    <!-- Sidebar Toggler (Sidebar) -->
+    <!-- Sidebar Toggler -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
 </ul>
-

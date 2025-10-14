@@ -87,3 +87,14 @@ $route['auth/mahasiswa'] = 'auth/mahasiswa';
 $route['auth/dosen'] = 'auth/dosen';
 $route['auth'] = 'auth/index';
 
+$route['dosen/mahasiswa_bimbingan'] = 'mahasiswa_bimbingan/index';
+$route['mahasiswa_bimbingan'] = 'mahasiswa_bimbingan/index';
+
+$route['dosen/jadwal_ujian'] = 'jadwal_ujian_dosen/index';
+
+// ==================== ROUTE DOSEN ====================
+$route['dosen/penilaian_ujian'] = 'Penilaian_ujian_dosen/index';
+$route['dosen/penilaian_ujian/nilai/(:num)'] = 'Penilaian_ujian_dosen/nilai/$1';
+$route['dosen/penilaian_ujian/simpan'] = 'Penilaian_ujian_dosen/simpan_nilai';
+
+

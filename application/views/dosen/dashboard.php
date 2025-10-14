@@ -1,6 +1,3 @@
- <!-- Sidebar -->
-    <?php $this->load->view('templates/sidebar_dosen'); ?>
-
 <div class="container mt-5">
     <h2 class="mb-4">Dashboard Dosen</h2>
 
@@ -31,7 +28,7 @@
                     <tr>
                         <td><?= $no++ ?></td>
                         <td><?= $u->judul ?></td>
-                        <td><?= date('d-m-Y', strtotime($u->tanggal_ujian)) ?></td>
+                        <td><?= date('d-m-Y', strtotime($u->tanggal)) ?></td>
                         <td><?= $u->waktu_ujian ?></td>
                     </tr>
                 <?php endforeach; ?>

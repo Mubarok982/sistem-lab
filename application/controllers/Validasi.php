@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Validasi extends CI_Controller {
+class Validasi extends MY_Controller {
 
     public function __construct()
     {

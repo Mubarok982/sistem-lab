@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mahasiswa extends CI_Controller {
+class Mahasiswa extends MY_Controller {
 
     public function __construct()
 {
@@ -57,30 +57,57 @@ class Mahasiswa extends CI_Controller {
     }
 
     /** Ajukan Judul Skripsi */
-    public function ajukan_skripsi()
-    {
-        $id_mahasiswa = $this->session->userdata('id');
-        $this->form_validation->set_rules('tema','Judul Skripsi','required|trim');
+ public function ajukan_skripsi()
+{
+    $id_mahasiswa = $this->session->userdata('id');
 
-        if ($this->form_validation->run() == FALSE) {
-            $data['judul_terakhir'] = $this->m_skripsi->get_latest_by_mahasiswa($id_mahasiswa);
-            $data['title'] = 'Ajukan Judul Skripsi';
-            $data['sidebar'] = $this->load->view('templates/sidebar_mahasiswa', $data, TRUE);
-            $data['header']  = $this->load->view('templates/header', $data, TRUE);
-            $data['footer']  = $this->load->view('templates/footer', $data, TRUE);
+    $this->form_validation->set_rules('tema','Tema Skripsi','required|trim');
+    $this->form_validation->set_rules('judul','Judul Skripsi','required|trim');
+    $this->form_validation->set_rules('skema','Skema','required|trim');
 
-            $this->load->view('mahasiswa/ajukan_skripsi', $data);
-        } else {
-            $tema = $this->input->post('tema');
-            $this->m_skripsi->insert_skripsi([
-                'id_mahasiswa' => $id_mahasiswa,
-                'tema' => $tema,
-                'status' => 'Diajukan'
-            ]);
-            $this->session->set_flashdata('message','<div class="alert alert-success">Judul skripsi berhasil diajukan!</div>');
-            redirect('mahasiswa/ajukan_skripsi');
+    if ($this->form_validation->run() == FALSE) {
+        $data['pengajuan_terakhir'] = $this->m_skripsi->get_latest_by_mahasiswa($id_mahasiswa);
+        $data['title'] = 'Ajukan Judul Skripsi';
+        $this->load_template('mahasiswa/ajukan_skripsi', $data);
+    } else {
+        // Konfigurasi upload
+        $config['upload_path']   = './uploads/naskah/';
+        $config['allowed_types'] = 'pdf|doc|docx';
+        $config['max_size']      = 5120; // Maks 5MB
+        $config['file_name']     = 'skripsi_' . $id_mahasiswa . '_' . time();
+
+        $this->load->library('upload', $config);
+
+        $file_name = null;
+        if (!empty($_FILES['naskah']['name'])) {
+            if ($this->upload->do_upload('naskah')) {
+                $file_name = $this->upload->data('file_name');
+            } else {
+                $this->session->set_flashdata('message', 
+                    '<div class="alert alert-danger">Upload gagal: ' . $this->upload->display_errors('', '') . '</div>'
+                );
+                redirect('mahasiswa/ajukan_skripsi');
+            }
         }
+
+        // Simpan ke database
+        $data_insert = [
+            'id_mahasiswa' => $id_mahasiswa,
+            'tema'         => $this->input->post('tema'),
+            'judul'        => $this->input->post('judul'),
+            'skema'        => $this->input->post('skema'),
+            'tgl_pengajuan_judul' => date('Y-m-d'),
+            'status'       => 'Diajukan',
+            'naskah'       => $file_name
+        ];
+
+        $this->m_skripsi->insert_skripsi($data_insert);
+
+        $this->session->set_flashdata('message','<div class="alert alert-success">Judul skripsi berhasil diajukan!</div>');
+        redirect('mahasiswa/ajukan_skripsi');
     }
+}
+
 
     /** Pendaftaran Ujian (Sempro/Sidang) */
     public function daftar_ujian($tipe='sempro')
