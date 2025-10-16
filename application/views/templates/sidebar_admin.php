@@ -62,18 +62,15 @@
         <div id="collapseSkripsi" class="collapse" aria-labelledby="headingSkripsi" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-                <!-- Jadwal Ujian Skripsi -->
-                <a class="collapse-item" href="<?= site_url('jadwal_ujian'); ?>">
-                    <i class="fas fa-fw fa-calendar-alt"></i> jadwal Ujian Skripsi
+                <a class="collapse-item" href="<?= site_url('admin/jadwal_ujian'); ?>">
+                    <i class="fas fa-fw fa-calendar-alt"></i> Jadwal Ujian Skripsi
                 </a>
 
-                <!-- Data Skripsi -->
-                <a class="collapse-item" href="<?= site_url('Skripsi'); ?>">
+                <a class="collapse-item" href="<?= site_url('admin/skripsi'); ?>">
                     <i class="fas fa-fw fa-book-reader"></i> Data Skripsi
                 </a>
 
-                <!-- Validasi Berkas -->
-                <a class="collapse-item" href="<?= site_url('Validasi_berkas'); ?>">
+                <a class="collapse-item" href="<?= site_url('admin/validasi_berkas'); ?>">
                     <i class="fas fa-fw fa-check-circle"></i> Validasi Berkas
                 </a>
 
@@ -81,14 +78,12 @@
         </div>
     </li>
 
-
     <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Heading -->
     <div class="sidebar-heading">Manajemen Ujian</div>
 
-    <!-- Manajemen Ujian -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUjian" aria-expanded="true"
             aria-controls="collapseUjian">
@@ -97,13 +92,13 @@
         </a>
         <div id="collapseUjian" class="collapse" aria-labelledby="headingUjian" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?= base_url('Validasi_ujian'); ?>">
+                <a class="collapse-item" href="<?= base_url('admin/validasi_ujian'); ?>">
                     <i class="fas fa-fw fa-clipboard-check"></i> Validasi Syarat Ujian
                 </a>
-                <a class="collapse-item" href="<?= base_url('Penjadwalan_ujian'); ?>">
+                <a class="collapse-item" href="<?= base_url('admin/penjadwalan_ujian'); ?>">
                     <i class="fas fa-fw fa-calendar-check"></i> Penjadwalan Ujian
                 </a>
-                <a class="collapse-item" href="<?= base_url('Penetapan_penguji'); ?>">
+                <a class="collapse-item" href="<?= base_url('admin/penetapan_penguji'); ?>">
                     <i class="fas fa-fw fa-user-tie"></i> Penetapan Dosen Penguji
                 </a>
             </div>
@@ -116,7 +111,6 @@
     <!-- Heading -->
     <div class="sidebar-heading">Monitoring & Laporan</div>
 
-    <!-- Monitoring & Laporan -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLaporan"
             aria-expanded="true" aria-controls="collapseLaporan">
@@ -125,10 +119,10 @@
         </a>
         <div id="collapseLaporan" class="collapse" aria-labelledby="headingLaporan" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?= base_url('Rekap_nilai'); ?>">
+                <a class="collapse-item" href="<?= base_url('admin/rekap_nilai'); ?>">
                     <i class="fas fa-fw fa-file-invoice"></i> Rekapitulasi Nilai
                 </a>
-                <a class="collapse-item" href="<?= base_url('Detail_ujian'); ?>">
+                <a class="collapse-item" href="<?= base_url('admin/detail_ujian'); ?>">
                     <i class="fas fa-fw fa-list-alt"></i> Detail Ujian
                 </a>
             </div>
@@ -137,15 +131,9 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-    <!-- Logout -->
 
-    <!-- Sidebar Toggler -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 
-    <!-- Divider -->
-<hr class="sidebar-divider d-none d-md-block">
 </ul>
-
-

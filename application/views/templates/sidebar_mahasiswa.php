@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item <?= ($this->uri->segment(2) == '' || $this->uri->segment(2) == 'dashboard') ? 'active' : ''; ?>">
-        <a class="nav-link" href="<?= base_url('mahasiswa'); ?>">
+        <a class="nav-link" href="<?= base_url('mahasiswa/dashboard'); ?>">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span>
         </a>
@@ -97,3 +97,4 @@
     </div>
 
 </ul>
+

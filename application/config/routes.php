@@ -52,49 +52,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['admin/akun/dosen'] = 'admin/akun_dosen';
-$route['admin/akun/dosen/tambah'] = 'admin/akun_dosen_tambah';
-$route['admin/akun/dosen/edit/(:num)'] = 'admin/akun_dosen_edit/$1';
-$route['admin/akun/dosen/hapus/(:num)'] = 'admin/akun_dosen_hapus/$1';
-$route['admin/akun/mahasiswa'] = 'akun/mahasiswa';
-$route['admin/akun/mahasiswa/tambah'] = 'akun/tambah_mahasiswa';
-$route['admin/akun/mahasiswa/simpan'] = 'akun/simpan_mahasiswa';
-$route['admin/akun/mahasiswa/edit/(:num)'] = 'akun/edit_mahasiswa/$1';
-$route['admin/akun/mahasiswa/update/(:num)'] = 'akun/update_mahasiswa/$1';
-$route['admin/akun/mahasiswa/hapus/(:num)'] = 'akun/hapus_mahasiswa/$1';
 
-// Skripsi
+#AUTH
+$route['auth'] = 'auth/index';
+$route['auth/mahasiswa'] = 'auth/mahasiswa';
+$route['auth/dosen'] = 'auth/dosen';
+
+#ADMIN 
+$route['admin'] = 'admin/dashboard';
+$route['admin/akun'] = 'admin/akun';
+$route['admin/akun/dosen'] = 'admin/akun/dosen';
+$route['admin/akun/dosen/tambah'] = 'admin/akun/tambah_dosen';
+$route['admin/akun/dosen/edit/(:num)'] = 'admin/akun/edit_dosen/$1';
+$route['admin/akun/dosen/hapus/(:num)'] = 'admin/akun/hapus_dosen/$1';
+
+$route['admin/akun/mahasiswa'] = 'admin/akun/mahasiswa';
+$route['admin/akun/mahasiswa/tambah'] = 'admin/akun/tambah_mahasiswa';
+$route['admin/akun/mahasiswa/edit/(:num)'] = 'admin/akun/edit_mahasiswa/$1';
+$route['admin/akun/mahasiswa/hapus/(:num)'] = 'admin/akun/hapus_mahasiswa/$1';
+
 $route['admin/skripsi'] = 'admin/skripsi/index';
 $route['admin/skripsi/tambah'] = 'admin/skripsi/tambah';
-$route['admin/skripsi/simpan'] = 'admin/skripsi/simpan';
 $route['admin/skripsi/edit/(:num)'] = 'admin/skripsi/edit/$1';
 $route['admin/skripsi/hapus/(:num)'] = 'admin/skripsi/hapus/$1';
 
-// Validasi Berkas
 $route['admin/validasi_berkas'] = 'admin/validasi_berkas/index';
+$route['admin/validasi_ujian'] = 'admin/validasi_ujian/index';
+$route['admin/validasi_ujian/setujui/(:num)'] = 'admin/validasi_ujian/setujui/$1';
+$route['admin/validasi_ujian/revisi/(:num)'] = 'admin/validasi_ujian/revisi/$1';
 
-// Jadwal Ujian Skripsi
-$route['admin/jadwal_ujian'] = 'admin/jadwal_ujian/index';
+$route['admin/jadwal_ujian'] = 'admin/jadwal_ujian_dosen/index';
+$route['admin/rekap_nilai'] = 'admin/rekap_nilai/index';
+$route['admin/penetapan_penguji'] = 'admin/penetapan_penguji/index';
 
-$route['admin/validasi_ujian'] = 'validasi_ujian/index';
-$route['admin/validasi_ujian/setujui/(:num)'] = 'validasi_ujian/setujui/$1';
-$route['admin/validasi_ujian/revisi/(:num)'] = 'validasi_ujian/revisi/$1';
+#DOSEN 
+$route['dosen'] = 'dosen/dashboard';
+$route['dosen/dashboard'] = 'dosen/dashboard';
+$route['dosen/jadwal_ujian'] = 'dosen/jadwal_ujian_dosen/index';
+$route['dosen/mahasiswa_bimbingan'] = 'dosen/mahasiswa_bimbingan/index';
+$route['dosen/penilaian_ujian'] = 'dosen/penilaian_ujian_dosen/index';
+$route['dosen/penilaian_ujian/nilai/(:num)'] = 'dosen/penilaian_ujian_dosen/nilai/$1';
+$route['dosen/penilaian_ujian/simpan'] = 'dosen/penilaian_ujian_dosen/simpan_nilai';
 
-// login mahasiswa
-$route['mahasiswa'] = 'mahasiswa/index';
-$route['mahasiswa/(:any)'] = 'mahasiswa/$1';
-$route['auth/mahasiswa'] = 'auth/mahasiswa';
-$route['auth/dosen'] = 'auth/dosen';
-$route['auth'] = 'auth/index';
-
-$route['dosen/mahasiswa_bimbingan'] = 'mahasiswa_bimbingan/index';
-$route['mahasiswa_bimbingan'] = 'mahasiswa_bimbingan/index';
-
-$route['dosen/jadwal_ujian'] = 'jadwal_ujian_dosen/index';
-
-// ==================== ROUTE DOSEN ====================
-$route['dosen/penilaian_ujian'] = 'Penilaian_ujian_dosen/index';
-$route['dosen/penilaian_ujian/nilai/(:num)'] = 'Penilaian_ujian_dosen/nilai/$1';
-$route['dosen/penilaian_ujian/simpan'] = 'Penilaian_ujian_dosen/simpan_nilai';
+// Routing untuk Mahasiswa
+$route['mahasiswa/dashboard']           = 'mahasiswa/mahasiswa/index';
+$route['mahasiswa/profil']              = 'mahasiswa/profil/index';
+$route['mahasiswa/pengajuan']           = 'mahasiswa/pengajuan/index';
+$route['mahasiswa/pendaftaran_sempro'] = 'mahasiswa/ujian/sempro';
+$route['mahasiswa/pendaftaran_ujian']  = 'mahasiswa/ujian/sidang';
+$route['mahasiswa/validasi/sempro']     = 'mahasiswa/validasi/sempro';
+$route['mahasiswa/validasi/pendadaran'] = 'mahasiswa/validasi/pendadaran';
+$route['mahasiswa/logout']              = 'mahasiswa/auth/logout';
 
 

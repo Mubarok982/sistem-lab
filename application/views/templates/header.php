@@ -25,12 +25,6 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <?php
-        if (isset($sidebar)) {
-            echo $sidebar;
-        }
-        ?>
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
             <!-- Main Content -->

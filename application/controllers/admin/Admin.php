@@ -15,14 +15,17 @@ class Admin extends MY_Controller {
     {
         $data['title'] = 'Dashboard Admin';
         $data['user']  = $this->m_akun->get_user_by_username($this->session->userdata('username'));
-        $this->load_template('admin/dashboard', $data);
+        // Tidak perlu $data['sidebar'] di sini
+        $data['content'] = 'admin/dashboard';
+        $this->load_template($data['content'], $data);
     }
 
     public function akun_dosen()
     {
         $data['title'] = 'Manajemen Akun Dosen';
         $data['list_dosen'] = $this->m_akun->get_all_dosen();
-        $this->load_template('admin/akun_dosen/index', $data);
+        $data['content'] = 'admin/akun_dosen/index';
+        $this->load_template($data['content'], $data);
     }
 
     public function akun_dosen_tambah()
@@ -33,7 +36,8 @@ class Admin extends MY_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Tambah Akun Dosen';
-            $this->load_template('admin/akun_dosen/tambah', $data);
+            $data['content'] = 'admin/akun_dosen/tambah';
+            $this->load_template($data['content'], $data);
         } else {
             $insert = [
                 'username' => $this->input->post('username'),
@@ -43,7 +47,7 @@ class Admin extends MY_Controller {
             ];
             $this->m_akun->insert($insert);
             $this->session->set_flashdata('success', 'Akun dosen berhasil ditambahkan!');
-            redirect('admin/akun/dosen');
+            redirect('admin/akun_dosen');
         }
     }
 
@@ -56,20 +60,20 @@ class Admin extends MY_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Edit Akun Dosen';
-            $this->load_template('admin/akun_dosen/edit', $data);
+            $data['content'] = 'admin/akun_dosen/edit';
+            $this->load_template($data['content'], $data);
         } else {
             $update = [
                 'nama' => $this->input->post('nama')
             ];
 
-            // Jika password diubah
             if (!empty($this->input->post('password'))) {
                 $update['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
             }
 
             $this->m_akun->update($id, $update);
             $this->session->set_flashdata('success', 'Akun dosen berhasil diperbarui!');
-            redirect('admin/akun/dosen');
+            redirect('admin/akun_dosen');
         }
     }
 
@@ -77,47 +81,47 @@ class Admin extends MY_Controller {
     {
         $this->m_akun->delete($id);
         $this->session->set_flashdata('success', 'Akun dosen berhasil dihapus!');
-        redirect('admin/akun/dosen');
+        redirect('admin/akun_dosen');
     }
 
     public function mahasiswa()
-{
-    $data['title'] = 'Manajemen Mahasiswa';
-    $data['user']  = $this->m_akun->get_user_by_username($this->session->userdata('username'));
-    $this->load->model('M_mahasiswa', 'm_mahasiswa');
-    $data['mahasiswa'] = $this->m_mahasiswa->get_all();
+    {
+        $this->load->model('M_mahasiswa', 'm_mahasiswa');
+        $data['title'] = 'Manajemen Mahasiswa';
+        $data['user']  = $this->m_akun->get_user_by_username($this->session->userdata('username'));
+        $data['mahasiswa'] = $this->m_mahasiswa->get_all();
+        $data['content'] = 'admin/mahasiswa/index';
+        $this->load_template($data['content'], $data);
+    }
 
-    $this->load_template('admin/mahasiswa/index', $data);
-}
+    public function tambah_mahasiswa()
+    {
+        $data['title'] = 'Tambah Mahasiswa';
+        $data['content'] = 'admin/mahasiswa/form';
+        $this->load_template($data['content'], $data);
+    }
 
-public function tambah_mahasiswa()
-{
-    $data['title'] = 'Tambah Mahasiswa';
-    $this->load_template('admin/mahasiswa/form', $data);
-}
+    public function simpan_mahasiswa()
+    {
+        $this->load->model('M_mahasiswa', 'm_mahasiswa');
+        $data = [
+            'nim' => $this->input->post('nim'),
+            'nama' => $this->input->post('nama'),
+            'prodi' => $this->input->post('prodi'),
+            'angkatan' => $this->input->post('angkatan'),
+            'email' => $this->input->post('email'),
+        ];
 
-public function simpan_mahasiswa()
-{
-    $this->load->model('M_mahasiswa', 'm_mahasiswa');
-    $data = [
-        'nim' => $this->input->post('nim'),
-        'nama' => $this->input->post('nama'),
-        'prodi' => $this->input->post('prodi'),
-        'angkatan' => $this->input->post('angkatan'),
-        'email' => $this->input->post('email'),
-    ];
+        $this->m_mahasiswa->insert($data);
+        $this->session->set_flashdata('success', 'Data mahasiswa berhasil ditambahkan!');
+        redirect('admin/mahasiswa');
+    }
 
-    $this->m_mahasiswa->insert($data);
-    $this->session->set_flashdata('success', 'Data mahasiswa berhasil ditambahkan!');
-    redirect('admin/mahasiswa');
-}
-
-public function hapus_mahasiswa($nim)
-{
-    $this->load->model('M_mahasiswa', 'm_mahasiswa');
-    $this->m_mahasiswa->delete($nim);
-    $this->session->set_flashdata('success', 'Data mahasiswa berhasil dihapus!');
-    redirect('admin/mahasiswa');
-}
-
+    public function hapus_mahasiswa($nim)
+    {
+        $this->load->model('M_mahasiswa', 'm_mahasiswa');
+        $this->m_mahasiswa->delete($nim);
+        $this->session->set_flashdata('success', 'Data mahasiswa berhasil dihapus!');
+        redirect('admin/mahasiswa');
+    }
 }

@@ -9,17 +9,17 @@ class MY_Controller extends CI_Controller {
     {
         parent::__construct();
 
-        // Cek login kecuali untuk halaman auth
+        // Cek login kecuali halaman auth
         if (!$this->session->userdata('logged_in') && $this->router->fetch_class() !== 'auth') {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Silakan login terlebih dahulu!</div>');
             redirect('auth');
         }
 
-        // Siapkan data dasar
+        // Data dasar
         $this->data['user'] = $this->session->userdata();
-        $this->data['title'] = isset($this->data['title']) ? $this->data['title'] : 'Sistem Lab Skripsi';
-        
-        // Load sidebar sesuai role
+        $this->data['title'] = 'Sistem Lab Skripsi';
+
+        // Sidebar otomatis sesuai role
         $this->load_sidebar();
     }
 
@@ -45,24 +45,21 @@ class MY_Controller extends CI_Controller {
             }
 
             if ($sidebar_view !== '') {
+                // Simpan hasil view sidebar (jangan tampilkan di sini)
                 $this->data['sidebar'] = $this->load->view($sidebar_view, $this->data, TRUE);
             }
         }
     }
 
-    /**
-     * Load template utama dengan header, sidebar, dan footer.
-     * Cukup panggil: $this->load_template('dosen/dashboard', $data);
-     */
     protected function load_template($content_view, $data = [])
     {
-        // Gabungkan data dari controller dan base controller
+        // Gabungkan data controller + global
         $this->data = array_merge($this->data, $data);
 
-        // Load header, sidebar, konten, footer
-        $this->load->view('templates/header', $this->data);
-        echo isset($this->data['sidebar']) ? $this->data['sidebar'] : '';
-        $this->load->view($content_view, $this->data);
-        $this->load->view('templates/footer', $this->data);
+        // Simpan path view konten
+        $this->data['content_view'] = $content_view;
+
+        // Load layout utama (1x sidebar)
+        $this->load->view('templates/main', $this->data);
     }
 }
