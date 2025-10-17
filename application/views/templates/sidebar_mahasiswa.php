@@ -59,8 +59,8 @@
         <div id="collapseValidasi" class="collapse <?= ($this->uri->segment(2) == 'validasi_sempro' || $this->uri->segment(2) == 'validasi_pendadaran') ? 'show' : ''; ?>"
              aria-labelledby="headingValidasi" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?= base_url('mahasiswa/validasi_sempro'); ?>">Seminar Proposal</a>
-                <a class="collapse-item" href="<?= base_url('mahasiswa/validasi_pendadaran'); ?>">Pendadaran</a>
+                <a class="collapse-item" href="<?= base_url('mahasiswa/validasi/sempro'); ?>">Seminar Proposal</a>
+                <a class="collapse-item" href="<?= base_url('mahasiswa/validasi/pendadaran'); ?>">Pendadaran</a>
             </div>
         </div>
     </li>
@@ -75,9 +75,9 @@
         <div id="collapseHasilUjian" class="collapse <?= ($this->uri->segment(2) == 'hasil_ujian') ? 'show' : ''; ?>"
              aria-labelledby="headingHasilUjian" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?= base_url('mahasiswa/hasil_ujian'); ?>">Lihat Nilai & Hasil</a>
-                <a class="collapse-item" href="<?= base_url('saran'); ?>">Lihat Saran Perbaikan</a>
-                <a class="collapse-item" href="<?= base_url('apresiasi'); ?>">Lihat Apresiasi</a>
+                <a class="collapse-item" href="<?= base_url('mahasiswa/hasil'); ?>">Lihat Nilai & Hasil</a>
+                <a class="collapse-item" href="<?= base_url('mahasiswa/hasil'); ?>">Lihat Saran Perbaikan</a>
+                <a class="collapse-item" href="<?= base_url('mahasiswa/hasil'); ?>">Lihat Apresiasi</a>
             </div>
         </div>
     </li>

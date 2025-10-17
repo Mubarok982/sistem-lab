@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('Dashboard'); ?>">
+        <a class="nav-link" href="<?= base_url('dosen/Dashboard'); ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -43,7 +43,7 @@
 
     <!-- Nav Item - Jadwal Ujian -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('dosen/jadwal_ujian'); ?>">
+        <a class="nav-link" href="<?= base_url('dosen/jadwal_ujian_dosen'); ?>">
             <i class="fas fa-fw fa-calendar-alt"></i>
             <span>Jadwal Ujian</span>
         </a>

@@ -59,8 +59,8 @@ $route['auth/mahasiswa'] = 'auth/mahasiswa';
 $route['auth/dosen'] = 'auth/dosen';
 
 #ADMIN 
-$route['admin'] = 'admin/dashboard';
-$route['admin/akun'] = 'admin/akun';
+$route['admin'] = 'admin/admin/dashboard';
+$route['admin/dashboard'] = 'admin/admin/dashboard';
 $route['admin/akun/dosen'] = 'admin/akun/dosen';
 $route['admin/akun/dosen/tambah'] = 'admin/akun/tambah_dosen';
 $route['admin/akun/dosen/edit/(:num)'] = 'admin/akun/edit_dosen/$1';
@@ -81,9 +81,10 @@ $route['admin/validasi_ujian'] = 'admin/validasi_ujian/index';
 $route['admin/validasi_ujian/setujui/(:num)'] = 'admin/validasi_ujian/setujui/$1';
 $route['admin/validasi_ujian/revisi/(:num)'] = 'admin/validasi_ujian/revisi/$1';
 
-$route['admin/jadwal_ujian'] = 'admin/jadwal_ujian_dosen/index';
 $route['admin/rekap_nilai'] = 'admin/rekap_nilai/index';
 $route['admin/penetapan_penguji'] = 'admin/penetapan_penguji/index';
+$route['admin/jadwal_ujian'] = 'admin/jadwal_ujian';
+
 
 #DOSEN 
 $route['dosen'] = 'dosen/dashboard';

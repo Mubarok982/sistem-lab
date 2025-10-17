@@ -1,19 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class jadwal_ujian extends CI_Controller {
+class Jadwal_ujian extends CI_Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        $this->load->helper('url');
-        $this->load->model('M_ujian');
+        // Load model kalau perlu
+        // $this->load->model('Jadwal_ujian_model');
+
+        // Cek login & role admin
     }
 
-    public function index()
-    {
+    public function index() {
         $data['title'] = 'Jadwal Ujian Skripsi';
-        $data['jadwal'] = $this->M_ujian->get_jadwal();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_admin', $data);
         $this->load->view('admin/skripsi/jadwal_ujian', $data);
+        $this->load->view('templates/footer');
     }
 }
