@@ -120,9 +120,6 @@
                 <a class="collapse-item" href="<?= base_url('admin/Rekap_nilai'); ?>">
                     <i class="fas fa-fw fa-file-invoice"></i> Rekapitulasi Nilai
                 </a>
-                <a class="collapse-item" href="<?= base_url('admin/Detail_ujian'); ?>">
-                    <i class="fas fa-fw fa-list-alt"></i> Detail Ujian
-                </a>
             </div>
         </div>
     </li>
