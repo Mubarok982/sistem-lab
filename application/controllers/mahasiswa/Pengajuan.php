@@ -13,7 +13,7 @@ class Pengajuan extends MY_Controller {
 
     private function _cek_login()
     {
-        if (!$this->session->userdata('id') || $this->session->userdata('role') !== 'mahasiswa') {
+        if (!$this->session->userdata('id_mahasiswa') || $this->session->userdata('role') !== 'mahasiswa') {
             redirect('auth/mahasiswa');
         }
     }

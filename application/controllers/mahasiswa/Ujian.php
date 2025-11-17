@@ -13,14 +13,14 @@ class Ujian extends MY_Controller {
     private function _cek_login()
     {
         // Pastikan hanya mahasiswa yang bisa mengakses
-        if (!$this->session->userdata('id') || $this->session->userdata('role') !== 'mahasiswa') {
+        if (!$this->session->userdata('id_mahasiswa') || $this->session->userdata('role') !== 'mahasiswa') {
             redirect('auth/mahasiswa');
         }
     }
 
     public function sempro()
     {
-        $id = $this->session->userdata('id');
+        $id = $this->session->userdata('id_mahasiswa');
 
         // Ambil data skripsi terbaru mahasiswa
         $skripsi = $this->m_skripsi->get_latest_by_mahasiswa($id);
@@ -49,7 +49,7 @@ class Ujian extends MY_Controller {
 
 public function sidang()
 {
-    $id = $this->session->userdata('id');
+    $id = $this->session->userdata('id_mahasiswa');
     $skripsi = $this->m_skripsi->get_latest_by_mahasiswa($id);
 
     $bisa_daftar = false;
@@ -80,7 +80,7 @@ public function sidang()
 
     public function pendaftaran()
 {
-    $id_mahasiswa = $this->session->userdata('id');
+    $id_mahasiswa = $this->session->userdata('id_mahasiswa');
 
     // Ambil data skripsi mahasiswa
     $skripsi = $this->db->get_where('tbl_skripsi', ['id_mahasiswa' => $id_mahasiswa])->row();
@@ -107,5 +107,16 @@ public function sidang()
     $this->load->view('mahasiswa/pendaftaran_ujian', $data);
     $this->load->view('templates/footer_mahasiswa');
 }
+
+public function hasil()
+{
+    $npm = $this->session->userdata('id_mahasiswa');
+    $data['rekap'] = $this->M_ujian->get_rekap($npm);
+    $data['notifikasi'] = $this->M_notifikasi->get_by_npm($npm);
+    $data['title'] = 'Hasil Ujian Skripsi';
+
+    $this->load->view('mahasiswa/hasil_ujian', $data);
+}
+
 
 }

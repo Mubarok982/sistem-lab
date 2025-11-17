@@ -19,7 +19,7 @@ class Profil extends MY_Controller {
 
     public function index()
     {
-        $id = $this->session->userdata('id');
+        $id = $this->session->userdata('id_mahasiswa');
         $data['mahasiswa'] = $this->m_akun->get_user_by_id($id);
         $data['title'] = 'Profil Mahasiswa';
         $this->load->view('mahasiswa/profil', $data);

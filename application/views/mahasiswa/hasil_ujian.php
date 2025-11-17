@@ -12,9 +12,9 @@ $this->load->view('templates/header', $title);
             <h6 class="m-0 font-weight-bold text-primary">Rekapitulasi Nilai Akhir Ujian</h6>
         </div>
         <div class="card-body">
-            <?php if (empty($rekap)) : ?>
+            <?php if (empty($rekap)): ?>
                 <div class="alert alert-info">Belum ada data nilai ujian yang tersedia.</div>
-            <?php else : ?>
+            <?php else: ?>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="table-light">
@@ -28,11 +28,11 @@ $this->load->view('templates/header', $title);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
+                            <?php
                             $total = 0;
-                            foreach ($rekap as $r) : 
+                            foreach ($rekap as $r):
                                 $total += $r['nilai_akhir'];
-                            ?>
+                                ?>
                                 <tr>
                                     <td><?= $r['jenis_ujian']; ?></td>
                                     <td><?= $r['komponen']; ?></td>
@@ -52,6 +52,16 @@ $this->load->view('templates/header', $title);
                     </table>
                 </div>
             <?php endif; ?>
+            <?php
+            $notifikasi = $this->M_notifikasi->get_by_npm($this->session->userdata('npm'));
+            if (!empty($notifikasi)):
+                $pesan_terbaru = $notifikasi[0]['pesan'];
+                ?>
+                <div class="alert alert-success">
+                    <strong>Notifikasi:</strong> <?= $pesan_terbaru; ?>
+                </div>
+            <?php endif; ?>
+
         </div>
     </div>
 </div>

@@ -11,14 +11,14 @@ class Validasi extends MY_Controller {
 
     private function _cek_login()
     {
-        if (!$this->session->userdata('id') || $this->session->userdata('role') !== 'mahasiswa') {
+        if (!$this->session->userdata('id_mahasiswa') || $this->session->userdata('role') !== 'mahasiswa') {
             redirect('auth/mahasiswa');
         }
     }
 
     public function sempro()
     {
-        $id = $this->session->userdata('id');
+        $id = $this->session->userdata('id_mahasiswa');
         $data['validasi'] = $this->db
             ->join('syarat_sempro s', 's.id = v.id_syarat_sempro')
             ->join('ujian_skripsi u', 'u.id = s.id_ujian_skripsi')

@@ -11,14 +11,11 @@ class Hasil extends CI_Controller {
         $this->load->helper('url');
 
         // Cegah akses tanpa login
-        if (!$this->session->userdata('id')) {
+        if (!$this->session->userdata('id_mahasiswa')) {
             redirect('auth');
         }
     }
 
-    /**
-     * Halaman utama: menampilkan nilai & hasil ujian mahasiswa
-     */
     public function index()
     {
         $id_mahasiswa = $this->session->userdata('id');

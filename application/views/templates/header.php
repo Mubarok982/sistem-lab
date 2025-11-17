@@ -37,21 +37,29 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Navbar (di kanan) -->
-                    <ul class="navbar-nav ml-auto">
+                    <!-- Teks Selamat Datang -->
+                    <h5 class="font-weight-bold text-primary mt-2">
+                        Selamat datang, <?= $this->session->userdata('nama'); ?>
+                    </h5>
+
+                    <!-- Spacer -->
+                    <div class="ml-auto"></div>
+
+                    <!-- Navbar (kanan) -->
+                    <ul class="navbar-nav">
 
                         <!-- Logout -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('auth/logout'); ?>">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                            </a>
-                        </li>
+                        <a class="nav-link" href="<?= base_url('auth/logout'); ?>">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+
 
                     </ul>
 
                 </nav>
                 <!-- End of Topbar -->
+
 
 
                 <!-- Begin Page Content -->

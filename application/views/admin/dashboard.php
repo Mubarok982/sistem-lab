@@ -11,11 +11,16 @@
                 <h6 class="m-0 font-weight-bold text-primary">Selamat Datang</h6>
             </div>
             <div class="card-body">
-                <p>Selamat datang di dashboard admin, <strong><?= htmlspecialchars($user->nama, ENT_QUOTES, 'UTF-8'); ?></strong>!</p>
-                <p>Anda telah berhasil login sebagai <?= htmlspecialchars($user->role, ENT_QUOTES, 'UTF-8'); ?>.</p>
+                <p>
+                    Selamat datang di dashboard admin, 
+                    <strong><?= htmlspecialchars($this->session->userdata('nama') ?? 'Admin', ENT_QUOTES, 'UTF-8'); ?></strong>!
+                </p>
+                <p>
+                    Anda telah berhasil login sebagai 
+                    <strong><?= htmlspecialchars($this->session->userdata('role') ?? 'admin', ENT_QUOTES, 'UTF-8'); ?></strong>.
+                </p>
                 <p class="mb-0">Gunakan sidebar di sebelah kiri untuk menavigasi menu yang tersedia.</p>
             </div>
         </div>
     </div>
 </div>
-

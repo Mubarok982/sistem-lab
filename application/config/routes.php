@@ -105,4 +105,10 @@ $route['mahasiswa/validasi/sempro']     = 'mahasiswa/validasi/sempro';
 $route['mahasiswa/validasi/pendadaran'] = 'mahasiswa/validasi/pendadaran';
 $route['mahasiswa/logout']              = 'mahasiswa/auth/logout';
 
+$route['api/terima_notifikasi'] = 'api/terima_notifikasi';
+$route['api'] = 'api/index';
 
+$route['login'] = 'auth';
+$route['login/admin'] = 'auth'; 
+$route['login/mahasiswa'] = 'auth/mahasiswa';
+$route['login/dosen'] = 'auth/dosen';

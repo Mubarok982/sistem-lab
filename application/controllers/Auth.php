@@ -6,15 +6,18 @@ class Auth extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('M_akun', 'm_akun');
+        $this->load->model('M_akun', 'akun');
         $this->load->library(['form_validation', 'session']);
     }
 
-    /** ====================== LOGIN ADMIN / OPERATOR / TATA USAHA ====================== */
+    // ====================================
+    // LOGIN ADMIN (default)
+    // URL: /auth
+    // ====================================
     public function index()
     {
-        if (in_array($this->session->userdata('role'), ['operator', 'tata_usaha'])) {
-            redirect('admin/dashboard');
+        if ($this->session->userdata('logged_in')) {
+            return $this->_redirect_by_role();
         }
 
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
@@ -24,94 +27,198 @@ class Auth extends CI_Controller {
             $data['title'] = 'Login Admin';
             $this->load->view('auth/login_admin', $data);
         } else {
-            $this->_proses_login(['operator', 'tata_usaha'], 'admin/dashboard');
+            $this->_proses_login_admin();
         }
     }
 
-    /** ====================== LOGIN MAHASISWA ====================== */
-    public function mahasiswa()
+
+    private function _proses_login_admin()
     {
-        if ($this->session->userdata('role') === 'mahasiswa') {
-            redirect('mahasiswa/dashboard');
+        $username = $this->input->post('username', TRUE);
+        $password = $this->input->post('password', TRUE);
+
+        $user = $this->akun->get_user_by_username($username);
+
+        if (!$user || $password != $user->password) {
+            $this->session->set_flashdata('message', 
+                '<div class="alert alert-danger">Username atau password salah!</div>'
+            );
+            return redirect('auth');
         }
 
-        $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        $this->session->set_userdata([
+            'logged_in' => TRUE,
+            'role'      => 'admin',
+            'id_admin'  => $user->id,
+            'nama'      => $user->nama,
+            'foto'      => 'assets/img/profile/default.png'
+        ]);
+
+        return redirect('admin/dashboard');
+    }
+
+
+
+    // ====================================
+    // LOGIN MAHASISWA
+    // URL: /auth/mahasiswa
+    // ====================================
+    public function mahasiswa()
+    {
+        if ($this->session->userdata('logged_in')) {
+            return $this->_redirect_by_role();
+        }
+
+        $this->form_validation->set_rules('npm', 'NPM', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Login Mahasiswa';
             $this->load->view('auth/login_mahasiswa', $data);
         } else {
-            $this->_proses_login(['mahasiswa'], 'mahasiswa/dashboard');
+            $this->_proses_login_mahasiswa();
         }
     }
 
-    /** ====================== LOGIN DOSEN ====================== */
-    public function dosen()
+
+    private function _proses_login_mahasiswa()
     {
-        if ($this->session->userdata('role') === 'dosen') {
-            redirect('dosen/dashboard');
+        $npm      = $this->input->post('npm', TRUE);
+        $password = $this->input->post('password', TRUE);
+
+        $akun = $this->db->get_where('akun_mahasiswa', ['npm' => $npm])->row();
+
+        if (!$akun || $password != $akun->password) {
+            $this->session->set_flashdata('message', 
+                '<div class="alert alert-danger">NPM atau password salah!</div>'
+            );
+            return redirect('auth/mahasiswa');
         }
 
-        $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        $bio = $this->db->get_where('akun_mahasiswa', [
+            'id_mahasiswa' => $akun->id_mahasiswa
+        ])->row();
+
+        $nama = $bio->nama ?? "Mahasiswa";
+        $foto = (!empty($bio->foto))
+            ? 'uploads/foto_mhs/' . $bio->foto
+            : 'assets/img/profile/default.png';
+
+        $this->session->set_userdata([
+            'logged_in'    => TRUE,
+            'role'         => 'mahasiswa',
+            'id_mahasiswa' => $akun->id_mahasiswa,
+            'npm'          => $akun->npm,
+            'nama'         => $nama,
+            'foto'         => $foto
+        ]);
+
+        return redirect('mahasiswa/dashboard');
+    }
+
+
+
+    // ====================================
+    // LOGIN DOSEN
+    // URL: /auth/dosen
+    // ====================================
+    public function dosen()
+    {
+        if ($this->session->userdata('logged_in')) {
+            return $this->_redirect_by_role();
+        }
+
+        $this->form_validation->set_rules('nip', 'NIP', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Login Dosen';
             $this->load->view('auth/login_dosen', $data);
         } else {
-            $this->_proses_login(['dosen'], 'dosen/dashboard');
+            $this->_proses_login_dosen();
         }
     }
 
-    /** ====================== FUNGSI PROSES LOGIN UMUM ====================== */
-    private function _proses_login($role_allowed = [], $redirect_dashboard = '')
-    {
-        // Pastikan parameter role_allowed adalah array
-        if (!is_array($role_allowed)) {
-            $role_allowed = [$role_allowed];
-        }
 
-        $username = $this->input->post('username', TRUE);
+    private function _proses_login_dosen()
+    {
+        $username = $this->input->post('nip', TRUE);
         $password = $this->input->post('password', TRUE);
 
-        $user = $this->m_akun->get_user_by_username($username);
+        $akun = $this->db->get_where('akun_dosen', ['nip' => $username])->row();
 
-        if ($user) {
-            if ($password === $user->password) {
+        if (!$akun || $password != $akun->password) {
+            $this->session->set_flashdata('message', 
+                '<div class="alert alert-danger">Username atau password salah!</div>'
+            );
+            return redirect('auth/dosen');
+        }
 
-                if (in_array($user->role, $role_allowed)) {
-                    $session_data = [
-                        'id'        => $user->id,
-                        'username'  => $user->username,
-                        'nama'      => $user->nama,
-                        'role'      => $user->role,
-                        'logged_in' => TRUE
-                    ];
+        $bio = $this->db->get_where('akun_dosen', [
+            'id_dosen' => $akun->id_dosen
+        ])->row();
 
-                    $this->session->set_userdata($session_data);
-                    redirect($redirect_dashboard);
-                } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger">Anda tidak memiliki akses ke halaman ini!</div>');
-                    redirect(current_url());
-                }
+        $nama = $bio->nama ?? "Dosen";
+        $foto = (!empty($bio->foto))
+            ? 'uploads/foto_dosen/' . $bio->foto
+            : 'assets/img/profile/default.png';
 
-            } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger">Password salah!</div>');
-                redirect(current_url());
-            }
+        $this->session->set_userdata([
+            'logged_in' => TRUE,
+            'role'      => 'dosen',
+            'id_dosen'  => $akun->id_dosen,
+            'username'  => $akun->username,
+            'nama'      => $nama,
+            'foto'      => $foto
+        ]);
 
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger">Username tidak ditemukan!</div>');
-            redirect(current_url());
+        return redirect('dosen/dashboard');
+    }
+
+
+
+
+    // ====================================
+    // AUTO REDIRECT BERDASARKAN ROLE
+    // ====================================
+    private function _redirect_by_role()
+    {
+        switch ($this->session->userdata('role')) {
+            case 'admin': return redirect('admin/dashboard');
+            case 'mahasiswa': return redirect('mahasiswa/dashboard');
+            case 'dosen': return redirect('dosen/dashboard');
         }
     }
 
-    /** ====================== LOGOUT ====================== */
+
+    // ====================================
+    // LOGOUT
+    // ====================================
     public function logout()
-    {
-        $this->session->sess_destroy();
-        $this->session->set_flashdata('message', '<div class="alert alert-success">Anda berhasil logout.</div>');
-        redirect('auth');
+{
+    // Simpan role sebelum session dihapus
+    $role = $this->session->userdata('role');
+
+    // Hapus semua session
+    $this->session->sess_destroy();
+
+    // Redirect sesuai role
+    switch ($role) {
+        case 'admin':
+            redirect('auth'); // login admin
+            break;
+
+        case 'mahasiswa':
+            redirect('auth/mahasiswa'); // login mahasiswa
+            break;
+
+        case 'dosen':
+            redirect('auth/dosen'); // login dosen
+            break;
+
+        default:
+            redirect('auth'); // fallback
     }
+}
+
 }
